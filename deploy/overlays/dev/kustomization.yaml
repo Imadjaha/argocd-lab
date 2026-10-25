@@ -8,4 +8,4 @@ replicas:
 configMapGenerator:
   - name: app-config
     behavior: merge
-    literals: [APP_ENV=dev, APP_VERSION=v1]
+    literals: [APP_ENV=dev, APP_VERSION=v2]
