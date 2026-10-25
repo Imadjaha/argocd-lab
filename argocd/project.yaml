@@ -3,7 +3,7 @@ kind: AppProject
 metadata: {name: lab, namespace: argocd}
 spec:
   description: Guardrails for the lab apps
-  sourceRepos: ["REPO_URL_PLACEHOLDER"]
+  sourceRepos: ["https://github.com/imadjaha/argocd-lab.git"]
   destinations:
     - {server: https://kubernetes.default.svc, namespace: "lab-*"}
     - {server: https://kubernetes.default.svc, namespace: "set-*"}
