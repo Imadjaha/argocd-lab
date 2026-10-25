@@ -123,7 +123,7 @@ perl --version
 Run commands from the project directory:
 
 ```bash
-cd /home/imad/Downloads/argocd-lab
+cd /<your-path>/argocd-lab
 ```
 
 ### Step 1: Create and push your Git repository
