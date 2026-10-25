@@ -1,0 +1,10 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata: {name: lab, namespace: argocd}
+spec:
+  description: Guardrails for the lab apps
+  sourceRepos: ["REPO_URL_PLACEHOLDER"]
+  destinations:
+    - {server: https://kubernetes.default.svc, namespace: "lab-*"}
+    - {server: https://kubernetes.default.svc, namespace: "set-*"}
+  clusterResourceWhitelist: [{group: "", kind: Namespace}]

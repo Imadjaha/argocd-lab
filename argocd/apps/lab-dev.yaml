@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: lab-dev
+  namespace: argocd
+  finalizers: [resources-finalizer.argocd.argoproj.io]
+spec:
+  project: lab
+  source:
+    repoURL: REPO_URL_PLACEHOLDER
+    targetRevision: main
+    path: deploy/overlays/dev
+  destination: {server: https://kubernetes.default.svc, namespace: lab-dev}
+  syncPolicy:
+    automated: {prune: true, selfHeal: true}   # full GitOps: Git is the only way to change the cluster
+    syncOptions: [CreateNamespace=true]

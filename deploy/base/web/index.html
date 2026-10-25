@@ -1,0 +1,36 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Argo lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#161616;--s1:#1D1D1D;--b:#333;--t:#EDEDED;--t2:#8A8A8A;--ac:#FF6B1A;--am:#FFB020;--ok:#3DD68C;--n:12px}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--t);font:400 16px/1.6 'Space Grotesk',system-ui,sans-serif;padding:64px 24px}
+main{max-width:960px;margin:0 auto;text-align:center}
+.eyebrow{font:400 12px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--am)}
+h1{font-weight:500;font-size:clamp(44px,8vw,88px);letter-spacing:-.045em;line-height:.98;margin:24px 0}
+.hl{color:var(--ac)} p{color:var(--t2);max-width:520px;margin:0 auto 48px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));text-align:left}
+.card{position:relative;isolation:isolate;padding:24px;background:var(--b);clip-path:polygon(0 0,calc(100% - var(--n)) 0,100% var(--n),100% 100%,var(--n) 100%,0 calc(100% - var(--n)))}
+.card::before{content:"";position:absolute;inset:1px;z-index:-1;background:var(--s1);clip-path:polygon(0 0,calc(100% - 11.4px) 0,100% 11.4px,100% 100%,11.4px 100%,0 calc(100% - 11.4px))}
+.card span{font:400 12px/1 'JetBrains Mono',monospace;color:var(--t2);letter-spacing:.04em;text-transform:uppercase}
+.card b{display:block;margin-top:12px;font:500 26px/1.2 'Space Grotesk',sans-serif;letter-spacing:-.02em;word-break:break-all}
+.card b.m{font:400 15px/1.4 'JetBrains Mono',monospace;color:var(--am)}
+footer{margin-top:48px;font:400 12px 'JetBrains Mono',monospace;color:var(--t2)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);margin-right:8px}
+</style></head><body><main>
+<div class="eyebrow">Argo CD lab</div>
+<h1>Delivered by <span class="hl">Git.</span></h1>
+<p>This page is served by pods that Argo CD keeps in sync with your repository. Change a file, push, and watch this change.</p>
+<div class="grid">
+<div class="card"><span>Version</span><b id="v">-</b></div>
+<div class="card"><span>Environment</span><b id="e">-</b></div>
+<div class="card"><span>Served by pod</span><b class="m" id="p">-</b></div>
+</div>
+<footer><span class="dot"></span>live from /api, refreshes every 2s <span id="t"></span></footer>
+</main>
+<script>
+async function tick(){try{const d=await (await fetch('/api/')).json();
+v.textContent=d.version;e.textContent=d.env;p.textContent=d.pod;t.textContent=d.time}catch(x){p.textContent='api unreachable'}}
+tick();setInterval(tick,2000);
+</script></body></html>

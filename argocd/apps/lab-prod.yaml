@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: lab-prod
+  namespace: argocd
+  finalizers: [resources-finalizer.argocd.argoproj.io]
+spec:
+  project: lab
+  source:
+    repoURL: REPO_URL_PLACEHOLDER
+    targetRevision: main
+    path: deploy/overlays/prod
+  destination: {server: https://kubernetes.default.svc, namespace: lab-prod}
+  syncPolicy:
+    # no 'automated' block: a human clicks Sync (or runs argocd app sync)
+    syncOptions: [CreateNamespace=true]

@@ -1,0 +1,24 @@
+# Exercise 8: one template, many Applications. Apply manually:
+#   kubectl apply -f argocd/extras/applicationset.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata: {name: lab-set, namespace: argocd}
+spec:
+  generators:
+    - list:
+        elements:
+          - {env: dev}
+          - {env: staging}
+  template:
+    metadata: {name: "set-{{env}}"}
+    spec:
+      project: lab
+      source:
+        repoURL: REPO_URL_PLACEHOLDER
+        targetRevision: main
+        path: "deploy/overlays/{{env}}"
+        kustomize: {namespace: "set-{{env}}"}
+      destination: {server: https://kubernetes.default.svc, namespace: "set-{{env}}"}
+      syncPolicy:
+        automated: {prune: true, selfHeal: true}
+        syncOptions: [CreateNamespace=true]
