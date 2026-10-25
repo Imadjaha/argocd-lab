@@ -1,3 +1,4 @@
+# Guardrails for the lab apps in order to prevent accidental deployments to the wrong namespace or cluster.
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata: {name: lab, namespace: argocd}
@@ -5,6 +6,7 @@ spec:
   description: Guardrails for the lab apps
   sourceRepos: ["https://github.com/imadjaha/argocd-lab.git"]
   destinations:
-    - {server: https://kubernetes.default.svc, namespace: "lab-*"}
-    - {server: https://kubernetes.default.svc, namespace: "set-*"}
+    - {server: https://kubernetes.default.svc, namespace: "lab-*"} # allow lab-dev, lab-prod, etc.
+    - {server: https://kubernetes.default.svc, namespace: "set-*"} # allow set-dev, set-prod, etc.
+  # Allow the creation of Namespaces
   clusterResourceWhitelist: [{group: "", kind: Namespace}]

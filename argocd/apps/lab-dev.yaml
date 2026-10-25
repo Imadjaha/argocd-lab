@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: lab-dev
   namespace: argocd
-  finalizers: [resources-finalizer.argocd.argoproj.io]
+  finalizers: [resources-finalizer.argocd.argoproj.io] # This finalizer ensures that the Application is not deleted until all of its resources are deleted. This is important for GitOps, where the Application is the source of truth for the cluster state.
 spec:
   project: lab
   source:
@@ -13,4 +13,4 @@ spec:
   destination: {server: https://kubernetes.default.svc, namespace: lab-dev}
   syncPolicy:
     automated: {prune: true, selfHeal: true}   # full GitOps: Git is the only way to change the cluster
-    syncOptions: [CreateNamespace=true]
+    syncOptions: [CreateNamespace=true] # allows ArgoCD to create the namespace if it doesn't exist. This is useful for new environments where the namespace may not have been created yet.

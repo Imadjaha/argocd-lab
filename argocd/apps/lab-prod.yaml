@@ -1,3 +1,4 @@
+# choose a git path, namespace and sync policy for per environment ArgoCD applications
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:

@@ -1,11 +1,12 @@
+# This is a Kustomization file for the staging environment. It specifies the namespace, resources, replicas, and config map generation for the staging deployment.
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: lab-staging
 resources: [../../base]
 replicas:
-  - {name: web, count: 2}
-  - {name: api, count: 2}
+  - {name: web, count: 2} # This specifies that the 'web' deployment should have 2 replicas in the staging environment
+  - {name: api, count: 2} # This specifies that the 'api' deployment should have 2 replicas in the staging environment
 configMapGenerator:
   - name: app-config
-    behavior: merge
-    literals: [APP_ENV=staging, APP_VERSION=v1]
+    behavior: merge # merge the new config with the existing one
+    literals: [APP_ENV=staging, APP_VERSION=v1] #  literals are key-value pairs that will be added to the config map

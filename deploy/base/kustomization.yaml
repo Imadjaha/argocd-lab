@@ -1,9 +1,12 @@
+# This is a Kustomization file for the base configuration of the application.
+# It defines the resources and configuration that will be used across different environments (dev, staging, prod).
+# The base configuration includes the application manifests and common settings.
 apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources: [app.yaml, hooks.yaml]
+kind: Kustomization # used to customize Kubernetes resources
+resources: [app.yaml, hooks.yaml] # resources to be included in the base configuration
 configMapGenerator:
-  - name: web-html
-    files: [web/index.html]
+  - name: web-html # This generates a ConfigMap named 'web-html' that contains the specified files.
+    files: [web/index.html] # This specifies that the 'index.html' file from the 'web' directory will be included in the 'web-html' ConfigMap.
   - name: web-conf
     files: [web/default.conf]
   - name: api-code

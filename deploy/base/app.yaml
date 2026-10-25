@@ -1,3 +1,5 @@
+# This is the base configuration for the application. It defines the deployments and services for the web and api components, as well as the necessary ConfigMaps for configuration and code.
+# It tells kubernetes how to deploy the application and what resources to use. The base configuration can be customized for different environments (dev, staging, prod) using overlays.
 apiVersion: apps/v1
 kind: Deployment
 metadata: {name: web, labels: {app: web}}

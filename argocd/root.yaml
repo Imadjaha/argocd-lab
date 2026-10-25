@@ -1,13 +1,13 @@
 # App of apps: one Application whose manifests are other Applications.
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: Application 
 metadata: {name: root, namespace: argocd}
 spec:
-  project: default
+  project: default # The project this application belongs to. Must be a valid project defined in the cluster.
   source:
     repoURL: https://github.com/imadjaha/argocd-lab.git
     targetRevision: main
     path: argocd/apps
-  destination: {server: https://kubernetes.default.svc, namespace: argocd}
-  syncPolicy:
-    automated: {prune: true, selfHeal: true}
+  destination: {server: https://kubernetes.default.svc, namespace: argocd} 
+  syncPolicy: 
+    automated: {prune: true, selfHeal: true} # Automatically sync the application with the source.

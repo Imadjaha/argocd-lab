@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: lab-dev
 resources: [../../base]
 replicas:
-  - {name: web, count: 1}
+  - {name: web, count: 1} 
   - {name: api, count: 1}
 configMapGenerator:
   - name: app-config
